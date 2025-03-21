@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learning Dialogues (LeD) Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .quiz-container { max-width: 700px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        .question { margin-bottom: 15px; }
+        .options { margin-left: 20px; }
+        .submit-btn { margin-top: 20px; padding: 10px; background-color: blue; color: white; border: none; cursor: pointer; }
+        .home-link { display: block; margin-top: 20px; text-decoration: none; color: blue; }
+        .feedback { margin-top: 20px; font-weight: bold; }
+    </style>
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            
+            // Correct answers for MCQs
+            let correctMcqAnswers = {
+                mcq1: "c",
+                mcq2: "b",
+                mcq3: "a",
+                mcq4: "b",
+                mcq5: "d"
+            };
+            
+            // Check MCQ answers
+            for (let key in correctMcqAnswers) {
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if (selected && selected.value === correctMcqAnswers[key]) {
+                    score++;
+                }
+            }
+            
+            // Correct answers for MSQs
+            let correctMsqAnswers = {
+                msq1: ["a", "c"],
+                msq2: ["b", "d"]
+            };
+            
+            // Check MSQ answers
+            for (let key in correctMsqAnswers) {
+                let selectedOptions = document.querySelectorAll(`input[name="${key}"]:checked`);
+                let selectedValues = Array.from(selectedOptions).map(opt => opt.value);
+                
+                if (selectedValues.length === correctMsqAnswers[key].length &&
+                    selectedValues.every(val => correctMsqAnswers[key].includes(val))) {
+                    score++;
+                }
+            }
+            
+            // Display score
+            document.getElementById("feedback").innerText = `Your score: ${score} / 7`;
+        }
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Learning Dialogues (LeD) Quiz</h1>
+        
+        <h2>Multiple Choice Questions (MCQ)</h2>
+
+        <div class="question">
+            <p>1. What is a Learning Dialogue (LeD)?</p>
+            <div class="options">
+                <input type="radio" name="mcq1" value="a"> a) A long lecture-style video <br>
+                <input type="radio" name="mcq1" value="b"> b) A content delivery video with no interruptions <br>
+                <input type="radio" name="mcq1" value="c"> c) A concept explanation with reflection spots <br>
+                <input type="radio" name="mcq1" value="d"> d) A list of multiple-choice questions <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. What is the primary purpose of a reflection spot?</p>
+            <div class="options">
+                <input type="radio" name="mcq2" value="a"> a) To assess learner performance <br>
+                <input type="radio" name="mcq2" value="b"> b) To engage learners and allow them to express their thinking <br>
+                <input type="radio" name="mcq2" value="c"> c) To replace content explanation <br>
+                <input type="radio" name="mcq2" value="d"> d) To make videos longer <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>3. How does an instructor create an effective Learning Dialogue?</p>
+            <div class="options">
+                <input type="radio" name="mcq3" value="a"> a) By integrating content with meaningful reflection spots <br>
+                <input type="radio" name="mcq3" value="b"> b) By providing only multiple-choice questions <br>
+                <input type="radio" name="mcq3" value="c"> c) By making long lectures <br>
+                <input type="radio" name="mcq3" value="d"> d) By giving learners a test at the end <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>4. Which of the following is a key benefit of reflection spots?</p>
+            <div class="options">
+                <input type="radio" name="mcq4" value="a"> a) They serve as graded assessments <br>
+                <input type="radio" name="mcq4" value="b"> b) They allow learners to apply concepts immediately <br>
+                <input type="radio" name="mcq4" value="c"> c) They increase the length of the video <br>
+                <input type="radio" name="mcq4" value="d"> d) They remove the need for quizzes <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>5. Why are Learning Dialogues better than simple content delivery videos?</p>
+            <div class="options">
+                <input type="radio" name="mcq5" value="a"> a) They are longer than regular videos <br>
+                <input type="radio" name="mcq5" value="b"> b) They only provide information without any interaction <br>
+                <input type="radio" name="mcq5" value="c"> c) They focus only on theory and not on application <br>
+                <input type="radio" name="mcq5" value="d"> d) They engage learners actively through reflection spots <br>
+            </div>
+        </div>
+
+        <h2>Multiple Select Questions (MSQ)</h2>
+
+        <div class="question">
+            <p>6. Which of the following are key components of a Learning Dialogue? (Select all that apply)</p>
+            <div class="options">
+                <input type="checkbox" name="msq1" value="a"> a) Content explanation <br>
+                <input type="checkbox" name="msq1" value="b"> b) Long, uninterrupted video lectures <br>
+                <input type="checkbox" name="msq1" value="c"> c) Reflection spots for engagement <br>
+                <input type="checkbox" name="msq1" value="d"> d) Only graded assessments <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>7. What are the advantages of reflection spots in Learning Dialogues? (Select all that apply)</p>
+            <div class="options">
+                <input type="checkbox" name="msq2" value="a"> a) They provide automatic grading for learners <br>
+                <input type="checkbox" name="msq2" value="b"> b) They promote active engagement <br>
+                <input type="checkbox" name="msq2" value="c"> c) They are optional and do not impact learning <br>
+                <input type="checkbox" name="msq2" value="d"> d) They give learners an opportunity to reflect on their learning <br>
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Submit</button>
+        <p id="feedback" class="feedback"></p>
+        <a href="index.html" class="home-link">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeD Dos & Don'ts Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .quiz-container { max-width: 700px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        .question { margin-bottom: 15px; }
+        .options { margin-left: 20px; }
+        .submit-btn { margin-top: 20px; padding: 10px; background-color: blue; color: white; border: none; cursor: pointer; }
+        .home-link { display: block; margin-top: 20px; text-decoration: none; color: blue; }
+        .feedback { margin-top: 20px; font-weight: bold; }
+    </style>
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            let totalQuestions = 7;
+            let feedbackText = "<h3>Your Score: " + score + " / " + totalQuestions + "</h3>";
+
+            // Correct answers for MCQs
+            let correctMcqAnswers = {
+                mcq1: "b",
+                mcq2: "d",
+                mcq3: "a",
+                mcq4: "c",
+                mcq5: "b"
+            };
+
+            // Checking MCQs
+            for (let key in correctMcqAnswers) {
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if (selected) {
+                    if (selected.value === correctMcqAnswers[key]) {
+                        score++;
+                        feedbackText += `<p>✅ Question ${key.slice(3)}: Correct!</p>`;
+                    } else {
+                        feedbackText += `<p>❌ Question ${key.slice(3)}: Incorrect. Correct answer is <b>${correctMcqAnswers[key]}</b>.</p>`;
+                    }
+                } else {
+                    feedbackText += `<p>⚠️ Question ${key.slice(3)}: No answer selected. Correct answer is <b>${correctMcqAnswers[key]}</b>.</p>`;
+                }
+            }
+
+            // Correct answers for MSQs
+            let correctMsqAnswers = {
+                msq1: ["a", "b", "c"],
+                msq2: ["b", "d"]
+            };
+
+            // Checking MSQs
+            for (let key in correctMsqAnswers) {
+                let selectedOptions = document.querySelectorAll(`input[name="${key}"]:checked`);
+                let selectedValues = Array.from(selectedOptions).map(opt => opt.value);
+
+                if (selectedValues.length > 0) {
+                    if (arraysEqual(selectedValues, correctMsqAnswers[key])) {
+                        score++;
+                        feedbackText += `<p>✅ Question ${key.slice(3)}: Correct!</p>`;
+                    } else {
+                        feedbackText += `<p>❌ Question ${key.slice(3)}: Incorrect. Correct answers are <b>${correctMsqAnswers[key].join(", ")}</b>.</p>`;
+                    }
+                } else {
+                    feedbackText += `<p>⚠️ Question ${key.slice(3)}: No answer selected. Correct answers are <b>${correctMsqAnswers[key].join(", ")}</b>.</p>`;
+                }
+            }
+
+            // Update score display
+            feedbackText = `<h3>Your Score: ${score} / ${totalQuestions}</h3>` + feedbackText;
+            document.getElementById("feedback").innerHTML = feedbackText;
+        }
+
+        // Function to compare arrays (for MSQs)
+        function arraysEqual(arr1, arr2) {
+            return arr1.length === arr2.length && arr1.sort().toString() === arr2.sort().toString();
+        }
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>LeD Dos & Don'ts Quiz</h1>
+        
+        <h2>Multiple Choice Questions (MCQ)</h2>
+
+        <div class="question">
+            <p>1. What is the most important factor when using screen capture?</p>
+            <div class="options">
+                <input type="radio" name="mcq1" value="a"> a) Using a colorful background <br>
+                <input type="radio" name="mcq1" value="b"> b) Synchronizing speech with action <br>
+                <input type="radio" name="mcq1" value="c"> c) Keeping all applications open <br>
+                <input type="radio" name="mcq1" value="d"> d) Using high-resolution text <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. What should be avoided when using handwritten explanations?</p>
+            <div class="options">
+                <input type="radio" name="mcq2" value="a"> a) Large handwriting <br>
+                <input type="radio" name="mcq2" value="b"> b) Using annotations <br>
+                <input type="radio" name="mcq2" value="c"> c) Writing in steps <br>
+                <input type="radio" name="mcq2" value="d"> d) Making complex and cluttered drawings <br>
+            </div>
+        </div>
+
+        <h2>Multiple Select Questions (MSQ)</h2>
+
+        <div class="question">
+            <p>3. What are benefits of animation in LeDs? (Select all that apply)</p>
+            <div class="options">
+                <input type="checkbox" name="msq1" value="a"> a) Shows processes not visible to the naked eye <br>
+                <input type="checkbox" name="msq1" value="b"> b) Makes the learning content engaging <br>
+                <input type="checkbox" name="msq1" value="c"> c) Helps explain complex phenomena clearly <br>
+                <input type="checkbox" name="msq1" value="d"> d) Requires no post-production editing <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>4. What are best practices for post-production? (Select all that apply)</p>
+            <div class="options">
+                <input type="checkbox" name="msq2" value="a"> a) Use flashy animations and transitions <br>
+                <input type="checkbox" name="msq2" value="b"> b) Avoid cluttered backgrounds and noisy visuals <br>
+                <input type="checkbox" name="msq2" value="c"> c) Add long introductory music <br>
+                <input type="checkbox" name="msq2" value="d"> d) Provide credits and take frequent backups <br>
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Submit</button>
+        <p id="feedback" class="feedback"></p>
+        <a href="index.html" class="home-link">Back to Home</a>
+    </div>
+</body>
+</html>

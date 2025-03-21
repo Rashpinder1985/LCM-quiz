@@ -8,6 +8,7 @@
         .options { margin-left: 20px; }
         .submit-btn { margin-top: 20px; }
         .home-link { display: block; margin-top: 20px; text-decoration: none; color: blue; }
+        .feedback { margin-top: 20px; font-weight: bold; }
     </style>
     <script>
         function checkAnswers() {
@@ -17,21 +18,34 @@
                 q2: "c",
                 q3: "a",
                 q4: "d",
-                q5: "b"
-                q6: "a", "c",
-                q7: "b", "d",
-                q8: "a", "b",
-                q9: "c", "d",
-                q10: "a", "d",
+                q5: "b",
+                q6: ["a", "c"],
+                q7: ["b", "d"],
+                q8: ["a", "b"],
+                q9: ["c", "d"],
+                q10: ["a", "d"]
             };
 
             for (let key in correctAnswers) {
-                let selected = document.querySelector(`input[name=${key}]:checked`);
-                if (selected && selected.value === correctAnswers[key]) {
-                    score++;
+                let selected = document.querySelectorAll(`input[name=${key}]:checked`);
+                let selectedValues = Array.from(selected).map(el => el.value);
+
+                if (Array.isArray(correctAnswers[key])) {
+                    if (arraysEqual(selectedValues, correctAnswers[key])) {
+                        score++;
+                    }
+                } else {
+                    if (selectedValues.length === 1 && selectedValues[0] === correctAnswers[key]) {
+                        score++;
+                    }
                 }
             }
-            alert(`Your score: ${score}/10`);
+
+            document.getElementById("feedback").innerText = `Your score: ${score}/10`;
+        }
+
+        function arraysEqual(arr1, arr2) {
+            return arr1.length === arr2.length && arr1.sort().toString() === arr2.sort().toString();
         }
     </script>
 </head>
@@ -42,9 +56,12 @@
         <div class="options">
             <input type="radio" name="q1" value="a"> a) No instructor involvement<br>
             <input type="radio" name="q1" value="b"> b) Open access and massive scale<br>
+            <input type="radio" name="q1" value="c"> c) Only self-paced learning<br>
+            <input type="radio" name="q1" value="d"> d) Paid certifications only
         </div>
     </div>
-<div class="question">2. What was one of the main reasons MOOCs gained popularity?
+
+    <div class="question">2. What was one of the main reasons MOOCs gained popularity?
         <div class="options">
             <input type="radio" name="q2" value="a"> a) Lack of traditional universities<br>
             <input type="radio" name="q2" value="b"> b) MOOCs are expensive<br>
@@ -52,6 +69,7 @@
             <input type="radio" name="q2" value="d"> d) MOOCs require no internet
         </div>
     </div>
+
     <div class="question">3. Which feature is essential for MOOCs?
         <div class="options">
             <input type="radio" name="q3" value="a"> a) Structured course format<br>
@@ -60,7 +78,7 @@
             <input type="radio" name="q3" value="d"> d) No start or end dates
         </div>
     </div>
-    
+
     <div class="question">4. How did big data impact MOOCs?
         <div class="options">
             <input type="radio" name="q4" value="a"> a) No impact<br>
@@ -69,7 +87,7 @@
             <input type="radio" name="q4" value="d"> d) Enabled analytics-driven improvements
         </div>
     </div>
-    
+
     <div class="question">5. What aspect of MOOCs makes them unique?
         <div class="options">
             <input type="radio" name="q5" value="a"> a) Restricted access<br>
@@ -78,7 +96,7 @@
             <input type="radio" name="q5" value="d"> d) No use of technology
         </div>
     </div>
-    
+
     <div class="question">6. Which factors contributed to the rise of MOOCs? (Select all that apply)
         <div class="options">
             <input type="checkbox" name="q6" value="a"> a) Availability of cloud computing<br>
@@ -87,7 +105,7 @@
             <input type="checkbox" name="q6" value="d"> d) High cost of education
         </div>
     </div>
-    
+
     <div class="question">7. What are key components of a MOOC? (Select all that apply)
         <div class="options">
             <input type="checkbox" name="q7" value="a"> a) No assessments<br>
@@ -96,7 +114,7 @@
             <input type="checkbox" name="q7" value="d"> d) Structured learning path
         </div>
     </div>
-    
+
     <div class="question">8. What differentiates a MOOC from OpenCourseWare? (Select all that apply)
         <div class="options">
             <input type="checkbox" name="q8" value="a"> a) MOOCs have a structured course format<br>
@@ -105,7 +123,7 @@
             <input type="checkbox" name="q8" value="d"> d) MOOCs do not have start dates
         </div>
     </div>
-    
+
     <div class="question">9. What technological advancements enabled MOOCs? (Select all that apply)
         <div class="options">
             <input type="checkbox" name="q9" value="a"> a) Slower internet speeds<br>
@@ -114,7 +132,7 @@
             <input type="checkbox" name="q9" value="d"> d) Big data analytics
         </div>
     </div>
-    
+
     <div class="question">10. What are the key goals of MOOCs? (Select all that apply)
         <div class="options">
             <input type="checkbox" name="q10" value="a"> a) Wider dissemination of expert knowledge<br>
@@ -123,7 +141,9 @@
             <input type="checkbox" name="q10" value="d"> d) Global accessibility to quality learning<br>
         </div>
     </div>
+
     <button class="submit-btn" onclick="checkAnswers()">Submit</button>
+    <p id="feedback" class="feedback"></p>
     <a href="index.html" class="home-link">Back to Home</a>
 </body>
 </html>

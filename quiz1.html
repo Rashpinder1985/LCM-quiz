@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MOOC Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .question { margin-bottom: 15px; }
+        .options { margin-left: 20px; }
+        .submit-btn { margin-top: 20px; }
+        .home-link { display: block; margin-top: 20px; text-decoration: none; color: blue; }
+    </style>
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            const correctAnswers = {
+                q1: "b",
+                q2: "c",
+                q3: "a",
+                q4: "d",
+                q5: "b"
+            };
+
+            for (let key in correctAnswers) {
+                let selected = document.querySelector(`input[name=${key}]:checked`);
+                if (selected && selected.value === correctAnswers[key]) {
+                    score++;
+                }
+            }
+            alert(`Your score: ${score}/5`);
+        }
+    </script>
+</head>
+<body>
+    <h2>MOOC Quiz</h2>
+    
+    <div class="question">1. What differentiates MOOCs from traditional online courses?
+        <div class="options">
+            <input type="radio" name="q1" value="a"> a) No instructor involvement<br>
+            <input type="radio" name="q1" value="b"> b) Open access and massive scale<br>
+        </div>
+    </div>
+
+    <button class="submit-btn" onclick="checkAnswers()">Submit</button>
+    <a href="index.html" class="home-link">Back to Home</a>
+</body>
+</html>

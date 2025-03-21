@@ -6,12 +6,12 @@
         body { font-family: Arial, sans-serif; margin: 20px; }
         .question { margin-bottom: 15px; }
         .options { margin-left: 20px; }
-        .submit-btn { margin-top: 20px; }
+        .submit-btn { margin-top: 20px; padding: 10px; background-color: blue; color: white; border: none; cursor: pointer; }
         .home-link { display: block; margin-top: 20px; text-decoration: none; color: blue; }
+        .feedback { margin-top: 20px; font-weight: bold; }
     </style>
     <script>
-        function calculateScore(event) {
-            event.preventDefault();
+        function checkAnswers() {
             let score = 0;
             
             // Correct answers for MCQs
@@ -52,7 +52,7 @@
             }
             
             // Display score
-            document.getElementById("result").innerText = `Your score: ${score} / 10`;
+            document.getElementById("feedback").innerText = `Your score: ${score} / 10`;
         }
     </script>
 </head>
@@ -60,88 +60,109 @@
     <h1>MOOC Learner Expectations Quiz</h1>
     
     <h2>Multiple Choice Questions (MCQ)</h2>
+    
     <div class="question">
         <p>1. What is a key reason learners prefer MOOCs over traditional courses?</p>
-        <input type="radio" name="mcq1" value="a"> a) Higher cost <br>
-        <input type="radio" name="mcq1" value="b"> b) Structured content delivery <br>
-        <input type="radio" name="mcq1" value="c"> c) Limited course availability <br>
-        <input type="radio" name="mcq1" value="d"> d) Face-to-face interaction <br>
-         </div>
-    </div>
-       <div class="question">
-        <p>2. Which factor makes MOOCs attractive to learners?</p>
-        <input type="radio" name="mcq2" value="a"> a) Lack of variety in knowledge sources <br>
-        <input type="radio" name="mcq2" value="b"> b) Fixed learning pace <br>
-        <input type="radio" name="mcq2" value="c"> c) Access to different knowledge areas <br>
-        <input type="radio" name="mcq2" value="d"> d) High course fees <br>
+        <div class="options">
+            <input type="radio" name="mcq1" value="a"> a) Higher cost <br>
+            <input type="radio" name="mcq1" value="b"> b) Structured content delivery <br>
+            <input type="radio" name="mcq1" value="c"> c) Limited course availability <br>
+            <input type="radio" name="mcq1" value="d"> d) Face-to-face interaction <br>
         </div>
     </div>
+
+    <div class="question">
+        <p>2. Which factor makes MOOCs attractive to learners?</p>
+        <div class="options">
+            <input type="radio" name="mcq2" value="a"> a) Lack of variety in knowledge sources <br>
+            <input type="radio" name="mcq2" value="b"> b) Fixed learning pace <br>
+            <input type="radio" name="mcq2" value="c"> c) Access to different knowledge areas <br>
+            <input type="radio" name="mcq2" value="d"> d) High course fees <br>
+        </div>
+    </div>
+
     <div class="question">
         <p>3. What is an important expectation from MOOCs for structured learning?</p>
-        <input type="radio" name="mcq3" value="a"> a) Curated and cohesive content <br>
-        <input type="radio" name="mcq3" value="b"> b) Self-curation of topics <br>
-        <input type="radio" name="mcq3" value="c"> c) Expensive enrollment fees <br>
-        <input type="radio" name="mcq3" value="d"> d) Short course duration <br>
+        <div class="options">
+            <input type="radio" name="mcq3" value="a"> a) Curated and cohesive content <br>
+            <input type="radio" name="mcq3" value="b"> b) Self-curation of topics <br>
+            <input type="radio" name="mcq3" value="c"> c) Expensive enrollment fees <br>
+            <input type="radio" name="mcq3" value="d"> d) Short course duration <br>
         </div>
     </div>
+
     <div class="question">
         <p>4. How do MOOCs provide flexibility?</p>
-        <input type="radio" name="mcq4" value="a"> a) Fixed schedule <br>
-        <input type="radio" name="mcq4" value="b"> b) Self-paced learning <br>
-        <input type="radio" name="mcq4" value="c"> c) Limited access to content <br>
-        <input type="radio" name="mcq4" value="d"> d) Mandatory synchronous sessions <br>
-      </div>
-    </div>  
-        <div class="question">
+        <div class="options">
+            <input type="radio" name="mcq4" value="a"> a) Fixed schedule <br>
+            <input type="radio" name="mcq4" value="b"> b) Self-paced learning <br>
+            <input type="radio" name="mcq4" value="c"> c) Limited access to content <br>
+            <input type="radio" name="mcq4" value="d"> d) Mandatory synchronous sessions <br>
+        </div>
+    </div>
+
+    <div class="question">
         <p>5. What is a significant benefit of interaction in MOOCs?</p>
-        <input type="radio" name="mcq5" value="a"> a) Learning from diverse perspectives <br>
-        <input type="radio" name="mcq5" value="b"> b) No peer discussions <br>
-        <input type="radio" name="mcq5" value="c"> c) Solo learning without input <br>
-        <input type="radio" name="mcq5" value="d"> d) Fixed peer groups <br>
-      </div>
-    </div>  
-        <h2>Multiple Select Questions (MSQ)</h2>
-        <div class="question">
-        <p>6. Which are key expectations of learners from MOOCs?</p>
-        <input type="checkbox" name="msq1" value="a"> a) Structured content delivery <br>
-        <input type="checkbox" name="msq1" value="b"> b) Cost-effectiveness <br>
-        <input type="checkbox" name="msq1" value="c"> c) Access to diverse knowledge <br>
-        <input type="checkbox" name="msq1" value="d"> d) Flexibility in timing <br>
-       </div>
-    </div> 
-            <div class="question">
+        <div class="options">
+            <input type="radio" name="mcq5" value="a"> a) Learning from diverse perspectives <br>
+            <input type="radio" name="mcq5" value="b"> b) No peer discussions <br>
+            <input type="radio" name="mcq5" value="c"> c) Solo learning without input <br>
+            <input type="radio" name="mcq5" value="d"> d) Fixed peer groups <br>
+        </div>
+    </div>
+
+    <h2>Multiple Select Questions (MSQ)</h2>
+
+    <div class="question">
+        <p>6. What are key expectations of learners from MOOCs?</p>
+        <div class="options">
+            <input type="checkbox" name="msq1" value="a"> a) Structured content delivery <br>
+            <input type="checkbox" name="msq1" value="b"> b) Cost-effectiveness <br>
+            <input type="checkbox" name="msq1" value="c"> c) Access to diverse knowledge <br>
+            <input type="checkbox" name="msq1" value="d"> d) Flexibility in timing <br>
+        </div>
+    </div>
+
+    <div class="question">
         <p>7. What makes MOOCs beneficial compared to traditional courses?</p>
-        <input type="checkbox" name="msq2" value="a"> a) Lower cost <br>
-        <input type="checkbox" name="msq2" value="b"> b) Wide range of subjects <br>
-        <input type="checkbox" name="msq2" value="c"> c) Self-paced learning <br>
-        <input type="checkbox" name="msq2" value="d"> d) Interactive discussions <br>
+        <div class="options">
+            <input type="checkbox" name="msq2" value="a"> a) Lower cost <br>
+            <input type="checkbox" name="msq2" value="b"> b) Wide range of subjects <br>
+            <input type="checkbox" name="msq2" value="c"> c) Self-paced learning <br>
+            <input type="checkbox" name="msq2" value="d"> d) Interactive discussions <br>
+        </div>
+    </div>
+    
+     <div class="question">
+        <p>8. Why do some learners prefer MOOCs for professional development?</p>
+        <div class="options">
+            <input type="checkbox" name="msq3" value="a"> a) Learning from field experts  <br>
+            <input type="checkbox" name="msq3" value="b"> b) Affordable certification <br>
+            <input type="checkbox" name="msq3" value="c"> c) Quick access to relevant topics <br>
+            <input type="checkbox" name="msq3" value="d"> d) Career advancement opportunities <br>
         </div>
     </div>
     <div class="question">
-        <p>8. Why do some learners prefer MOOCs for professional development?</p>
-        <input type="checkbox" name="msq3" value="a"> a) Learning from field experts <br>
-        <input type="checkbox" name="msq3" value="b"> b) Affordable certification <br>
-        <input type="checkbox" name="msq3" value="c"> c) Quick access to relevant topics <br>
-        <input type="checkbox" name="msq3" value="d"> d) Career advancement opportunities <br>
-       </div>
-    </div> 
-    <div class="question">
         <p>9. What are common motivations for enrolling in MOOCs?</p>
-        <input type="checkbox" name="msq4" value="a"> a) Browsing and exploration <br>
-        <input type="checkbox" name="msq4" value="b"> b) Learning new skills <br>
-        <input type="checkbox" name="msq4" value="c"> c) Gaining specific knowledge <br>
-        <input type="checkbox" name="msq4" value="d"> d) Requirement for job or research <br>
-       </div>
-    </div> 
+        <div class="options">
+            <input type="checkbox" name="msq3" value="a"> a) Browsing and exploration  <br>
+            <input type="checkbox" name="msq3" value="b"> b) Learning new skills <br>
+            <input type="checkbox" name="msq3" value="c"> c) Gaining specific knowledge <br>
+            <input type="checkbox" name="msq3" value="d"> d) Requirement for job or research <br>
+        </div>
+    </div>
+
     <div class="question">
         <p>10. What factors contribute to a successful MOOC experience?</p>
-        <input type="checkbox" name="msq5" value="a"> a) Structured and curated content <br>
-        <input type="checkbox" name="msq5" value="b"> b) Expert instructors <br>
-        <input type="checkbox" name="msq5" value="c"> c) Peer interaction and discussions <br>
-        <input type="checkbox" name="msq5" value="d"> d) Flexibility in course selection <br>
-       </div>
-    </div> 
-        <button class="submit-btn" onclick="checkAnswers()">Submit</button>
+        <div class="options">
+            <input type="checkbox" name="msq5" value="a"> a) Structured and curated content <br>
+            <input type="checkbox" name="msq5" value="b"> b) Expert instructors <br>
+            <input type="checkbox" name="msq5" value="c"> c) Peer interaction and discussions <br>
+            <input type="checkbox" name="msq5" value="d"> d) Flexibility in course selection <br>
+        </div>
+    </div>
+
+    <button class="submit-btn" onclick="checkAnswers()">Submit</button>
     <p id="feedback" class="feedback"></p>
     <a href="index.html" class="home-link">Back to Home</a>
 </body>

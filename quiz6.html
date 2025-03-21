@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Learner-Centric MOOCs (LCM)?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            max-width: 700px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .feedback {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 5px;
+            display: none;
+        }
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Why Learner-Centric MOOCs (LCM)?</h2>
+
+    <div class="question">
+        <p>1. What is the key difference between content-oriented and learning-oriented MOOCs?</p>
+        <div class="options">
+            <label><input type="radio" name="q1" value="a"> a) Content-oriented MOOCs focus on the instructor’s explanation</label>
+            <label><input type="radio" name="q1" value="b"> b) Learning-oriented MOOCs focus on how well learners understand concepts</label>
+            <label><input type="radio" name="q1" value="c"> c) Content-oriented MOOCs have more videos</label>
+            <label><input type="radio" name="q1" value="d"> d) Learning-oriented MOOCs do not require videos</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>2. Why might a traditional MOOC structure not be fully learner-centric?</p>
+        <div class="options">
+            <label><input type="radio" name="q2" value="a"> a) It lacks instructor videos</label>
+            <label><input type="radio" name="q2" value="b"> b) It does not provide peer interaction or structured feedback</label>
+            <label><input type="radio" name="q2" value="c"> c) It only has text-based content</label>
+            <label><input type="radio" name="q2" value="d"> d) It requires too much learner participation</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>3. What is missing in a MOOC that simply provides videos, practice questions, resources, and a discussion forum?</p>
+        <div class="options">
+            <label><input type="radio" name="q3" value="a"> a) Learner motivation and engagement strategies</label>
+            <label><input type="radio" name="q3" value="b"> b) Opportunities for learners to express their reasoning</label>
+            <label><input type="radio" name="q3" value="c"> c) Formative assessments and customized feedback</label>
+            <label><input type="radio" name="q3" value="d"> d) All of the above</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>4. Which key elements make a MOOC more learner-centric? (Select all that apply)</p>
+        <div class="options">
+            <label><input type="checkbox" name="q4" value="a"> a) Learning Dialogues</label>
+            <label><input type="checkbox" name="q4" value="b"> b) Learning by Doing</label>
+            <label><input type="checkbox" name="q4" value="c"> c) Learning Extension Trajectories</label>
+            <label><input type="checkbox" name="q4" value="d"> d) Passive video watching</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>5. What are the main challenges in creating a learner-centric MOOC? (Select all that apply)</p>
+        <div class="options">
+            <label><input type="checkbox" name="q5" value="a"> a) Designing activities that encourage peer interaction</label>
+            <label><input type="checkbox" name="q5" value="b"> b) Providing immediate and meaningful feedback</label>
+            <label><input type="checkbox" name="q5" value="c"> c) Ensuring all students have the same learning style</label>
+            <label><input type="checkbox" name="q5" value="d"> d) Creating mechanisms to encourage active participation</label>
+        </div>
+    </div>
+
+    <button type="button" class="btn" onclick="checkAnswers()">Submit</button>
+
+    <div id="feedback" class="feedback"></div>
+
+    <a href="index.html" class="home-link">Back to Home</a>
+</div>
+
+<script>
+    function checkAnswers() {
+        let correctAnswers = {
+            q1: ["b"],
+            q2: ["b"],
+            q3: ["d"],
+            q4: ["a", "b", "c"],
+            q5: ["a", "b", "d"]
+        };
+
+        let score = 0;
+        let totalQuestions = Object.keys(correctAnswers).length;
+        let feedbackText = "";
+
+        for (let key in correctAnswers) {
+            let selected = document.querySelectorAll('input[name="' + key + '"]:checked');
+            let selectedValues = Array.from(selected).map(input => input.value);
+
+            if (selectedValues.length > 0) {
+                if (arraysEqual(selectedValues, correctAnswers[key])) {
+                    score++;
+                } else {
+                    feedbackText += `<p>❌ Question ${key.slice(1)}: Incorrect. The correct answer(s) are <b>${correctAnswers[key].join(", ")}</b>.</p>`;
+                }
+            } else {
+                feedbackText += `<p>⚠️ Question ${key.slice(1)}: No answer selected. The correct answer(s) are <b>${correctAnswers[key].join(", ")}</b>.</p>`;
+            }
+        }
+
+        feedbackText = `<h3>Your Score: ${score} / ${totalQuestions}</h3>` + feedbackText;
+        let feedbackDiv = document.getElementById("feedback");
+        feedbackDiv.innerHTML = feedbackText;
+        feedbackDiv.style.display = "block";
+    }
+
+    function arraysEqual(arr1, arr2) {
+        return arr1.length === arr2.length && arr1.sort().toString() === arr2.sort().toString();
+    }
+</script>
+
+</body>
+</html>

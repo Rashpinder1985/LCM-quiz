@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Introducing Reflection Spot Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .quiz-container { max-width: 700px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        .question { margin-bottom: 15px; }
+        .options { margin-left: 20px; }
+        .submit-btn { margin-top: 20px; padding: 10px; background-color: blue; color: white; border: none; cursor: pointer; }
+        .home-link { display: block; margin-top: 20px; text-decoration: none; color: blue; }
+        .feedback { margin-top: 20px; font-weight: bold; }
+    </style>
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            
+            // Correct answers for MCQs
+            let correctMcqAnswers = {
+                mcq1: "c",
+                mcq2: "a",
+                mcq3: "b",
+                mcq4: "d",
+                mcq5: "b"
+            };
+            
+            // Check MCQ answers
+            for (let key in correctMcqAnswers) {
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if (selected && selected.value === correctMcqAnswers[key]) {
+                    score++;
+                }
+            }
+            
+            // Correct answers for MSQs
+            let correctMsqAnswers = {
+                msq1: ["a", "b", "d"],
+                msq2: ["b", "c", "d"]
+            };
+            
+            // Check MSQ answers
+            for (let key in correctMsqAnswers) {
+                let selectedOptions = document.querySelectorAll(`input[name="${key}"]:checked`);
+                let selectedValues = Array.from(selectedOptions).map(opt => opt.value);
+                
+                if (selectedValues.length === correctMsqAnswers[key].length &&
+                    selectedValues.every(val => correctMsqAnswers[key].includes(val))) {
+                    score++;
+                }
+            }
+            
+            // Display score
+            document.getElementById("feedback").innerText = `Your score: ${score} / 7`;
+        }
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Introducing Reflection Spot Quiz</h1>
+        
+        <h2>Multiple Choice Questions (MCQ)</h2>
+
+        <div class="question">
+            <p>1. What is the main purpose of a reflection spot in an LeD?</p>
+            <div class="options">
+                <input type="radio" name="mcq1" value="a"> a) To introduce a completely new topic <br>
+                <input type="radio" name="mcq1" value="b"> b) To summarize the video content <br>
+                <input type="radio" name="mcq1" value="c"> c) To engage learners and allow micro-practice <br>
+                <input type="radio" name="mcq1" value="d"> d) To replace the need for quizzes <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. When should a reflection spot be introduced?</p>
+            <div class="options">
+                <input type="radio" name="mcq2" value="a"> a) When learners may disengage from the content <br>
+                <input type="radio" name="mcq2" value="b"> b) Only at the end of a video <br>
+                <input type="radio" name="mcq2" value="c"> c) After every sentence in a video <br>
+                <input type="radio" name="mcq2" value="d"> d) When no learner interaction is required <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>3. Which of the following is an example of a reflection spot?</p>
+            <div class="options">
+                <input type="radio" name="mcq3" value="a"> a) A long theoretical explanation <br>
+                <input type="radio" name="mcq3" value="b"> b) A multiple-choice question about the preceding content <br>
+                <input type="radio" name="mcq3" value="c"> c) An introduction to a new topic <br>
+                <input type="radio" name="mcq3" value="d"> d) A conclusion with no learner input <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>4. What type of engagement do reflection spots primarily encourage?</p>
+            <div class="options">
+                <input type="radio" name="mcq4" value="a"> a) Passive watching <br>
+                <input type="radio" name="mcq4" value="b"> b) Memorization without application <br>
+                <input type="radio" name="mcq4" value="c"> c) Skipping ahead to the next topic <br>
+                <input type="radio" name="mcq4" value="d"> d) Active learner interaction with the content <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>5. What should follow a reflection spot in an LeD?</p>
+            <div class="options">
+                <input type="radio" name="mcq5" value="a"> a) A completely unrelated topic <br>
+                <input type="radio" name="mcq5" value="b"> b) A validation of learner responses <br>
+                <input type="radio" name="mcq5" value="c"> c) A lecture without interaction <br>
+                <input type="radio" name="mcq5" value="d"> d) A final exam <br>
+            </div>
+        </div>
+
+        <h2>Multiple Select Questions (MSQ)</h2>
+
+        <div class="question">
+            <p>6. What are key characteristics of an effective reflection spot? (Select all that apply)</p>
+            <div class="options">
+                <input type="checkbox" name="msq1" value="a"> a) It provides opportunities for micro-practice <br>
+                <input type="checkbox" name="msq1" value="b"> b) It is placed at logical points in an LeD <br>
+                <input type="checkbox" name="msq1" value="c"> c) It interrupts learning without reason <br>
+                <input type="checkbox" name="msq1" value="d"> d) It engages learners beyond simple content recall <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>7. Which of the following are examples of reflection spots in a programming course? (Select all that apply)</p>
+            <div class="options">
+                <input type="checkbox" name="msq2" value="a"> a) A long video with no questions <br>
+                <input type="checkbox" name="msq2" value="b"> b) Asking learners to compare two types of loops <br>
+                <input type="checkbox" name="msq2" value="c"> c) Showing a loop and asking learners to predict its output <br>
+                <input type="checkbox" name="msq2" value="d"> d) Providing a small coding challenge within the LeD <br>
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Submit</button>
+        <p id="feedback" class="feedback"></p>
+        <a href="index.html" class="home-link">Back to Home</a>
+    </div>
+</body>
+</html>

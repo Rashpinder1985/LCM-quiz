@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning by Doing (LbD) Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .quiz-container { max-width: 700px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        .question { margin-bottom: 15px; }
+        .options label { display: block; margin: 5px 0; }
+        .submit-btn { margin-top: 20px; padding: 10px; background-color: blue; color: white; border: none; cursor: pointer; }
+        .feedback { margin-top: 20px; font-weight: bold; }
+    </style>
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            let totalQuestions = 4;
+            let feedbackText = "";
+
+            // Correct answers for MCQs
+            let correctMcqAnswers = {
+                mcq1: "b",
+                mcq2: "d",
+            };
+
+            // Checking MCQs
+            for (let key in correctMcqAnswers) {
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if (selected) {
+                    if (selected.value === correctMcqAnswers[key]) {
+                        score++;
+                        feedbackText += `<p>✅ Question ${key.slice(3)}: Correct! Good job.</p>`;
+                    } else {
+                        feedbackText += `<p>❌ Question ${key.slice(3)}: Incorrect. Correct answer is <b>${correctMcqAnswers[key]}</b>. LbDs focus on formative feedback.</p>`;
+                    }
+                } else {
+                    feedbackText += `<p>⚠️ Question ${key.slice(3)}: No answer selected. Correct answer is <b>${correctMcqAnswers[key]}</b>.</p>`;
+                }
+            }
+
+            // Correct answers for MSQs
+            let correctMsqAnswers = {
+                msq3: ["a", "b", "c"],
+                msq4: ["b", "d"]
+            };
+
+            // Checking MSQs
+            for (let key in correctMsqAnswers) {
+                let selectedOptions = document.querySelectorAll(`input[name="${key}"]:checked`);
+                let selectedValues = Array.from(selectedOptions).map(opt => opt.value);
+
+                if (selectedValues.length > 0) {
+                    if (arraysEqual(selectedValues, correctMsqAnswers[key])) {
+                        score++;
+                        feedbackText += `<p>✅ Question ${key.slice(3)}: Correct! You selected all the right options.</p>`;
+                    } else {
+                        feedbackText += `<p>❌ Question ${key.slice(3)}: Incorrect. Correct answers are <b>${correctMsqAnswers[key].join(", ")}</b>.</p>`;
+                    }
+                } else {
+                    feedbackText += `<p>⚠️ Question ${key.slice(3)}: No answer selected. Correct answers are <b>${correctMsqAnswers[key].join(", ")}</b>.</p>`;
+                }
+            }
+
+            // Update score display
+            feedbackText = `<h3>Your Score: ${score} / ${totalQuestions}</h3>` + feedbackText;
+            document.getElementById("feedback").innerHTML = feedbackText;
+        }
+
+        // Function to compare arrays (for MSQs)
+        function arraysEqual(arr1, arr2) {
+            return arr1.length === arr2.length && arr1.sort().toString() === arr2.sort().toString();
+        }
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Learning by Doing (LbD) Quiz</h1>
+        
+        <h2>Multiple Choice Questions (MCQ)</h2>
+
+        <div class="question">
+            <p>1. What is the primary purpose of an LbD activity?</p>
+            <div class="options">
+                <label><input type="radio" name="mcq1" value="a"> a) Final grading of students</label>
+                <label><input type="radio" name="mcq1" value="b"> b) Formative assessment and feedback</label>
+                <label><input type="radio" name="mcq1" value="c"> c) Checking attendance</label>
+                <label><input type="radio" name="mcq1" value="d"> d) One-time evaluation</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. What type of feedback should an LbD activity provide?</p>
+            <div class="options">
+                <label><input type="radio" name="mcq2" value="a"> a) Just correct or wrong</label>
+                <label><input type="radio" name="mcq2" value="b"> b) No feedback at all</label>
+                <label><input type="radio" name="mcq2" value="c"> c) Only numerical scores</label>
+                <label><input type="radio" name="mcq2" value="d"> d) Constructive, guiding learners on improvement</label>
+            </div>
+        </div>
+
+        <h2>Multiple Select Questions (MSQ)</h2>
+
+        <div class="question">
+            <p>3. What are key goals of an LbD activity? (Select all that apply)</p>
+            <div class="options">
+                <label><input type="checkbox" name="msq3" value="a"> a) Concept attainment</label>
+                <label><input type="checkbox" name="msq3" value="b"> b) Immediate application</label>
+                <label><input type="checkbox" name="msq3" value="c"> c) Integration of knowledge</label>
+                <label><input type="checkbox" name="msq3" value="d"> d) Only final assessments</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>4. Which of these are best practices in designing an LbD? (Select all that apply)</p>
+            <div class="options">
+                <label><input type="checkbox" name="msq4" value="a"> a) Provide no feedback</label>
+                <label><input type="checkbox" name="msq4" value="b"> b) Include constructive feedback</label>
+                <label><input type="checkbox" name="msq4" value="c"> c) Ask complex but unclear questions</label>
+                <label><input type="checkbox" name="msq4" value="d"> d) Align with learning goals</label>
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Submit</button>
+        <p id="feedback" class="feedback"></p>
+    </div>
+</body>
+</html>

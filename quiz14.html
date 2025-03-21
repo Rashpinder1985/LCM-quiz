@@ -14,64 +14,64 @@
         .feedback { margin-top: 20px; font-weight: bold; }
     </style>
     <script>
-        function checkAnswers() {
-            let score = 0;
-            let totalQuestions = 4;
-            let feedbackText = "<h3>Your Score: " + score + " / " + totalQuestions + "</h3>";
+          function checkAnswers() {
+    let score = 0;
+    let totalQuestions = 4;
+    let feedbackText = "<h3>Your Score: " + score + " / " + totalQuestions + "</h3>";
 
-            // Correct answers for MCQs
-            let correctMcqAnswers = {
-                mcq1: "b",
-                mcq2: "c",
-            };
+    // Correct answers for MCQs
+    let correctMcqAnswers = {
+        mcq1: "b",
+        mcq2: "d",
+    };
 
-            // Checking MCQs
-            for (let key in correctMcqAnswers) {
-                let selected = document.querySelector(`input[name="${key}"]:checked`);
-                if (selected) {
-                    if (selected.value === correctMcqAnswers[key]) {
-                        score++;
-                        feedbackText += `<p>✅ Question ${key.slice(3)}: Correct!</p>`;
-                    } else {
-                        feedbackText += `<p>❌ Question ${key.slice(3)}: Incorrect. Correct answer is <b>${correctMcqAnswers[key]}</b>.</p>`;
-                    }
-                } else {
-                    feedbackText += `<p>⚠️ Question ${key.slice(3)}: No answer selected. Correct answer is <b>${correctMcqAnswers[key]}</b>.</p>`;
-                }
+    // Checking MCQs
+    for (let key in correctMcqAnswers) {
+        let selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected) {
+            if (selected.value === correctMcqAnswers[key]) {
+                score++;
+                feedbackText += `<p>✅ Question ${key.slice(3)}: Correct!</p>`;
+            } else {
+                feedbackText += `<p>❌ Question ${key.slice(3)}: Incorrect. Correct answer is <b>${correctMcqAnswers[key]}</b>.</p>`;
             }
+        } else {
+            feedbackText += `<p>⚠️ Question ${key.slice(3)}: No answer selected. Correct answer is <b>${correctMcqAnswers[key]}</b>.</p>`;
+        }
+    }
 
-            // Correct answers for MSQs
-            let correctMsqAnswers = {
-                msq3: ["a", "c", "d"],
-                msq4: ["b", "d"]
-            };
+    // Correct answers for MSQs (Updated to match HTML)
+    let correctMsqAnswers = {
+        msq3: ["a", "b", "c"],
+        msq4: ["b", "d"]
+    };
 
-            // Checking MSQs
-            for (let key in correctMsqAnswers) {
-                let selectedOptions = document.querySelectorAll(`input[name="${key}"]:checked`);
-                let selectedValues = Array.from(selectedOptions).map(opt => opt.value);
+    // Checking MSQs
+    for (let key in correctMsqAnswers) {
+        let selectedOptions = document.querySelectorAll(`input[name="${key}"]:checked`);
+        let selectedValues = Array.from(selectedOptions).map(opt => opt.value);
 
-                if (selectedValues.length > 0) {
-                    if (arraysEqual(selectedValues, correctMsqAnswers[key])) {
-                        score++;
-                        feedbackText += `<p>✅ Question ${key.slice(3)}: Correct!</p>`;
-                    } else {
-                        feedbackText += `<p>❌ Question ${key.slice(3)}: Incorrect. Correct answers are <b>${correctMsqAnswers[key].join(", ")}</b>.</p>`;
-                    }
-                } else {
-                    feedbackText += `<p>⚠️ Question ${key.slice(3)}: No answer selected. Correct answers are <b>${correctMsqAnswers[key].join(", ")}</b>.</p>`;
-                }
+        if (selectedValues.length > 0) {
+            if (arraysEqual(selectedValues, correctMsqAnswers[key])) {
+                score++;
+                feedbackText += `<p>✅ Question ${key.slice(3)}: Correct!</p>`;
+            } else {
+                feedbackText += `<p>❌ Question ${key.slice(3)}: Incorrect. Correct answers are <b>${correctMsqAnswers[key].join(", ")}</b>.</p>`;
             }
-
-            // Update score display
-            feedbackText = `<h3>Your Score: ${score} / ${totalQuestions}</h3>` + feedbackText;
-            document.getElementById("feedback").innerHTML = feedbackText;
+        } else {
+            feedbackText += `<p>⚠️ Question ${key.slice(3)}: No answer selected. Correct answers are <b>${correctMsqAnswers[key].join(", ")}</b>.</p>`;
         }
+    }
 
-        // Function to compare arrays (for MSQs)
-        function arraysEqual(arr1, arr2) {
-            return arr1.length === arr2.length && arr1.sort().toString() === arr2.sort().toString();
-        }
+    // Update score display
+    feedbackText = `<h3>Your Score: ${score} / ${totalQuestions}</h3>` + feedbackText;
+    document.getElementById("feedback").innerHTML = feedbackText;
+}
+
+// Function to compare arrays (for MSQs)
+function arraysEqual(arr1, arr2) {
+    return arr1.length === arr2.length && arr1.sort().toString() === arr2.sort().toString();
+}
     </script>
 </head>
 <body>

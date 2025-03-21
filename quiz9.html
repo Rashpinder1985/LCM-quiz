@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chunking a Lecture into LeDs Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .quiz-container { max-width: 700px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        .question { margin-bottom: 15px; }
+        .options { margin-left: 20px; }
+        .submit-btn { margin-top: 20px; padding: 10px; background-color: blue; color: white; border: none; cursor: pointer; }
+        .home-link { display: block; margin-top: 20px; text-decoration: none; color: blue; }
+        .feedback { margin-top: 20px; font-weight: bold; }
+    </style>
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            
+            // Correct answers for MCQs
+            let correctMcqAnswers = {
+                mcq1: "b",
+                mcq2: "a",
+                mcq3: "c",
+                mcq4: "b",
+                mcq5: "d"
+            };
+            
+            // Check MCQ answers
+            for (let key in correctMcqAnswers) {
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if (selected && selected.value === correctMcqAnswers[key]) {
+                    score++;
+                }
+            }
+            
+            // Correct answers for MSQs
+            let correctMsqAnswers = {
+                msq1: ["a", "b", "d"],
+                msq2: ["b", "c", "d"]
+            };
+            
+            // Check MSQ answers
+            for (let key in correctMsqAnswers) {
+                let selectedOptions = document.querySelectorAll(`input[name="${key}"]:checked`);
+                let selectedValues = Array.from(selectedOptions).map(opt => opt.value);
+                
+                if (selectedValues.length === correctMsqAnswers[key].length &&
+                    selectedValues.every(val => correctMsqAnswers[key].includes(val))) {
+                    score++;
+                }
+            }
+            
+            // Display score
+            document.getElementById("feedback").innerText = `Your score: ${score} / 7`;
+        }
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Chunking a Lecture into LeDs Quiz</h1>
+        
+        <h2>Multiple Choice Questions (MCQ)</h2>
+
+        <div class="question">
+            <p>1. What is the purpose of chunking a lecture into LeDs?</p>
+            <div class="options">
+                <input type="radio" name="mcq1" value="a"> a) To make lectures longer <br>
+                <input type="radio" name="mcq1" value="b"> b) To break content into smaller, more interactive units <br>
+                <input type="radio" name="mcq1" value="c"> c) To remove practical examples from lectures <br>
+                <input type="radio" name="mcq1" value="d"> d) To replace reflection spots with traditional exams <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. What is a natural pause point in a lecture?</p>
+            <div class="options">
+                <input type="radio" name="mcq2" value="a"> a) A moment where an instructor asks a question or gives an example <br>
+                <input type="radio" name="mcq2" value="b"> b) A point where the instructor repeats the same topic multiple times <br>
+                <input type="radio" name="mcq2" value="c"> c) The last five minutes of the lecture <br>
+                <input type="radio" name="mcq2" value="d"> d) The part of a lecture where no interaction happens <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>3. Which of the following is a valid way to create an LeD?</p>
+            <div class="options">
+                <input type="radio" name="mcq3" value="a"> a) By providing only long, uninterrupted videos <br>
+                <input type="radio" name="mcq3" value="b"> b) By removing all explanations and using only reflection spots <br>
+                <input type="radio" name="mcq3" value="c"> c) By identifying points where natural pauses occur <br>
+                <input type="radio" name="mcq3" value="d"> d) By giving a final assessment instead of reflection spots <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>4. In a programming lecture, which of the following can be used as an LeD?</p>
+            <div class="options">
+                <input type="radio" name="mcq4" value="a"> a) A continuous lecture without pauses <br>
+                <input type="radio" name="mcq4" value="b"> b) A demonstration of a loop with an interactive example <br>
+                <input type="radio" name="mcq4" value="c"> c) A video explaining syntax without any practice <br>
+                <input type="radio" name="mcq4" value="d"> d) A slide with only theoretical concepts <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>5. What is an important characteristic of an effective LeD?</p>
+            <div class="options">
+                <input type="radio" name="mcq5" value="a"> a) It only contains theoretical explanations <br>
+                <input type="radio" name="mcq5" value="b"> b) It replaces interactive elements with traditional assignments <br>
+                <input type="radio" name="mcq5" value="c"> c) It eliminates the need for practice <br>
+                <input type="radio" name="mcq5" value="d"> d) It engages learners through structured reflection spots <br>
+            </div>
+        </div>
+
+        <h2>Multiple Select Questions (MSQ)</h2>
+
+        <div class="question">
+            <p>6. Which of the following are valid ways to chunk a lecture into LeDs? (Select all that apply)</p>
+            <div class="options">
+                <input type="checkbox" name="msq1" value="a"> a) Splitting the content based on key concepts <br>
+                <input type="checkbox" name="msq1" value="b"> b) Adding reflection spots at natural pause points <br>
+                <input type="checkbox" name="msq1" value="c"> c) Removing examples to shorten the lecture <br>
+                <input type="checkbox" name="msq1" value="d"> d) Including demonstrations and interactive questions <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>7. What are some effective strategies for creating engaging LeDs? (Select all that apply)</p>
+            <div class="options">
+                <input type="checkbox" name="msq2" value="a"> a) Only using text-based content <br>
+                <input type="checkbox" name="msq2" value="b"> b) Using interactive activities for deeper understanding <br>
+                <input type="checkbox" name="msq2" value="c"> c) Providing explanations along with examples <br>
+                <input type="checkbox" name="msq2" value="d"> d) Structuring the content logically with reflection spots <br>
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Submit</button>
+        <p id="feedback" class="feedback"></p>
+        <a href="index.html" class="home-link">Back to Home</a>
+    </div>
+</body>
+</html>

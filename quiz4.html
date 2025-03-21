@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolution of MOOCs Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            max-width: 700px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .feedback {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 5px;
+            display: none;
+        }
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Evolution of MOOCs Quiz</h2>
+
+    <div class="question">
+        <p>1. Which initiative in 2000 was an early attempt at large-scale online learning?</p>
+        <div class="options">
+            <label><input type="radio" name="q1" value="a"> a) MIT OpenCourseWare</label>
+            <label><input type="radio" name="q1" value="b"> b) Alliance for Lifelong Learning</label>
+            <label><input type="radio" name="q1" value="c"> c) Udacity</label>
+            <label><input type="radio" name="q1" value="d"> d) Khan Academy</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>2. Who was the professor from Utah University that conducted an early online course?</p>
+        <div class="options">
+            <label><input type="radio" name="q2" value="a"> a) David Wiley</label>
+            <label><input type="radio" name="q2" value="b"> b) Stephen Downes</label>
+            <label><input type="radio" name="q2" value="c"> c) Peter Norvig</label>
+            <label><input type="radio" name="q2" value="d"> d) Sebastian Thrun</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>3. What was the first widely recognized MOOC experiment in 2008?</p>
+        <div class="options">
+            <label><input type="radio" name="q3" value="a"> a) Introduction to AI</label>
+            <label><input type="radio" name="q3" value="b"> b) Connectivism and Connective Knowledge</label>
+            <label><input type="radio" name="q3" value="c"> c) Peer to Peer University</label>
+            <label><input type="radio" name="q3" value="d"> d) Open HPI</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>4. Which MOOC platforms were launched in 2012? (Select all that apply)</p>
+        <div class="options">
+            <label><input type="checkbox" name="q4" value="a"> a) Coursera</label>
+            <label><input type="checkbox" name="q4" value="b"> b) edX</label>
+            <label><input type="checkbox" name="q4" value="c"> c) Future Learn</label>
+            <label><input type="checkbox" name="q4" value="d"> d) Stanford Online</label>
+        </div>
+    </div>
+
+    <button type="button" class="btn" onclick="checkAnswers()">Submit</button>
+
+    <div id="feedback" class="feedback"></div>
+
+    <a href="index.html" class="home-link">Back to Home</a>
+</div>
+
+<script>
+    function checkAnswers() {
+        let correctAnswers = {
+            q1: ["b"],
+            q2: ["a"],
+            q3: ["b"],
+            q4: ["a", "b", "c"]
+        };
+
+        let score = 0;
+        let totalQuestions = Object.keys(correctAnswers).length;
+        let feedbackText = "";
+
+        for (let key in correctAnswers) {
+            let selected = document.querySelectorAll('input[name="' + key + '"]:checked');
+            let selectedValues = Array.from(selected).map(input => input.value);
+
+            if (selectedValues.length > 0) {
+                if (arraysEqual(selectedValues, correctAnswers[key])) {
+                    score++;
+                } else {
+                    feedbackText += `<p>❌ Question ${key.slice(1)}: Incorrect. The correct answer(s) are <b>${correctAnswers[key].join(", ")}</b>.</p>`;
+                }
+            } else {
+                feedbackText += `<p>⚠️ Question ${key.slice(1)}: No answer selected. The correct answer(s) are <b>${correctAnswers[key].join(", ")}</b>.</p>`;
+            }
+        }
+
+        feedbackText = `<h3>Your Score: ${score} / ${totalQuestions}</h3>` + feedbackText;
+        let feedbackDiv = document.getElementById("feedback");
+        feedbackDiv.innerHTML = feedbackText;
+        feedbackDiv.style.display = "block";
+    }
+
+    function arraysEqual(arr1, arr2) {
+        return arr1.length === arr2.length && arr1.sort().toString() === arr2.sort().toString();
+    }
+</script>
+
+</body>
+</html>

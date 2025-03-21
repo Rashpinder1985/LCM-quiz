@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Making Your Own LeD Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .quiz-container { max-width: 700px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); }
+        .question { margin-bottom: 15px; }
+        .options { margin-left: 20px; }
+        .submit-btn { margin-top: 20px; padding: 10px; background-color: blue; color: white; border: none; cursor: pointer; }
+        .home-link { display: block; margin-top: 20px; text-decoration: none; color: blue; }
+        .feedback { margin-top: 20px; font-weight: bold; }
+    </style>
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            
+            // Correct answers for MCQs
+            let correctMcqAnswers = {
+                mcq1: "b",
+                mcq2: "d",
+                mcq3: "c",
+                mcq4: "b",
+                mcq5: "c"
+            };
+            
+            // Check MCQ answers
+            for (let key in correctMcqAnswers) {
+                let selected = document.querySelector(`input[name="${key}"]:checked`);
+                if (selected && selected.value === correctMcqAnswers[key]) {
+                    score++;
+                }
+            }
+            
+            // Correct answers for MSQs
+            let correctMsqAnswers = {
+                msq1: ["a", "c", "d"],
+                msq2: ["b", "d"]
+            };
+            
+            // Check MSQ answers
+            for (let key in correctMsqAnswers) {
+                let selectedOptions = document.querySelectorAll(`input[name="${key}"]:checked`);
+                let selectedValues = Array.from(selectedOptions).map(opt => opt.value);
+                
+                if (selectedValues.length === correctMsqAnswers[key].length &&
+                    selectedValues.every(val => correctMsqAnswers[key].includes(val))) {
+                    score++;
+                }
+            }
+            
+            // Display score
+            document.getElementById("feedback").innerText = `Your score: ${score} / 7`;
+        }
+    </script>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Making Your Own LeD Quiz</h1>
+        
+        <h2>Multiple Choice Questions (MCQ)</h2>
+
+        <div class="question">
+            <p>1. What is the main benefit of a Talking Head video in an LeD?</p>
+            <div class="options">
+                <input type="radio" name="mcq1" value="a"> a) Displays text information clearly <br>
+                <input type="radio" name="mcq1" value="b"> b) Helps establish a personal connection with learners <br>
+                <input type="radio" name="mcq1" value="c"> c) Best suited for complex animations <br>
+                <input type="radio" name="mcq1" value="d"> d) Provides real-time assessment <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. What is the best way to combine slides and instructor videos?</p>
+            <div class="options">
+                <input type="radio" name="mcq2" value="a"> a) Show full-screen video of the instructor <br>
+                <input type="radio" name="mcq2" value="b"> b) Show the instructor in a small box while slides are full-screen <br>
+                <input type="radio" name="mcq2" value="c"> c) Use only one method at a time <br>
+                <input type="radio" name="mcq2" value="d"> d) Use Picture-in-Picture format with the slide as the main focus <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>3. Which video mode is best for explaining a changing program output?</p>
+            <div class="options">
+                <input type="radio" name="mcq3" value="a"> a) Talking Head <br>
+                <input type="radio" name="mcq3" value="b"> b) Slides <br>
+                <input type="radio" name="mcq3" value="c"> c) Screen Capture <br>
+                <input type="radio" name="mcq3" value="d"> d) Picture-in-Picture <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>4. Why should you avoid using a small slide with a full-screen instructor video?</p>
+            <div class="options">
+                <input type="radio" name="mcq4" value="a"> a) It helps emphasize instructor expressions <br>
+                <input type="radio" name="mcq4" value="b"> b) The text on the slide may become unreadable <br>
+                <input type="radio" name="mcq4" value="c"> c) It is the best practice in online teaching <br>
+                <input type="radio" name="mcq4" value="d"> d) It is a requirement for MOOCs <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>5. What should you consider when choosing the mode of an LeD?</p>
+            <div class="options">
+                <input type="radio" name="mcq5" value="a"> a) Always using Talking Head videos <br>
+                <input type="radio" name="mcq5" value="b"> b) Always using slides <br>
+                <input type="radio" name="mcq5" value="c"> c) The type of content and engagement required <br>
+                <input type="radio" name="mcq5" value="d"> d) Avoiding all video formats <br>
+            </div>
+        </div>
+
+        <h2>Multiple Select Questions (MSQ)</h2>
+
+        <div class="question">
+            <p>6. Which video modes can be used to explain program output? (Select all that apply)</p>
+            <div class="options">
+                <input type="checkbox" name="msq1" value="a"> a) Screen Capture <br>
+                <input type="checkbox" name="msq1" value="b"> b) Instructor Talking Head only <br>
+                <input type="checkbox" name="msq1" value="c"> c) Animation <br>
+                <input type="checkbox" name="msq1" value="d"> d) Handwritten Explanation <br>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>7. What are advantages of Picture-in-Picture mode? (Select all that apply)</p>
+            <div class="options">
+                <input type="checkbox" name="msq2" value="a"> a) It makes slides smaller <br>
+                <input type="checkbox" name="msq2" value="b"> b) It combines instructor presence with content emphasis <br>
+                <input type="checkbox" name="msq2" value="c"> c) It avoids all visual distractions <br>
+                <input type="checkbox" name="msq2" value="d"> d) It provides the best of both worlds <br>
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="checkAnswers()">Submit</button>
+        <p id="feedback" class="feedback"></p>
+        <a href="index.html" class="home-link">Back to Home</a>
+    </div>
+</body>
+</html>
